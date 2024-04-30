@@ -4,10 +4,21 @@ import './style.css'
 function Todo() {
     const [task , setTask] = useState(""); 
     const [tasks , setTasks] = useState([]);
-    
+    const [showDropdown, setShowDropdown] = useState(false);
+    const [selectedFilter, setSelectedFilter] = useState('all');
+
+    const toggleFilterItems= () => {
+        setShowDropdown(!showDropdown)
+    }
     function handleTask(e){
         setTask(e.target.value);
     }
+
+    const filterTodos = (filter) => {
+        // Your logic for filtering todos based on the selected filter
+        setSelectedFilter(filter);
+        console.log(`Filtering todos by: ${filter}`);
+    };
 
     function handleTasks(){
         if(task.trim() === "") return;
@@ -45,9 +56,26 @@ function Todo() {
             <h1>TODO APP</h1>
             <div className="todo-container">
                 <input className="todo-input" type="text" value={task} onChange={(e) => handleTask(e)}/>
+                <input className="todo-date" type="date" />
                 <button className="add-button" onClick={() => handleTasks()} disabled={!task}>Add</button>
             </div>
     
+            <div className="todos-filter">
+                <div  className="dropdown">
+                    <button className = "filter-button" onClick={toggleFilterItems}>Filter</button>
+                    {showDropdown && (
+                        <ul className="filter-items">
+                            <li onClick={() => filterTodos('all')} className={selectedFilter === 'all' ? 'active' : ''}><a>All</a></li>
+                            <li onClick={() => filterTodos('pending')} className={selectedFilter === 'pending' ? 'active' : ''}><a>Pending</a></li>
+                            <li onClick={() => filterTodos('completed')} className={selectedFilter === 'completed' ? 'active' : ''}><a>Completed</a></li>
+                        </ul>
+                    )}
+                </div>
+                <button className="filter-button delete-all-button">
+                    Delete All
+                </button>
+            </div>
+
             <ul className="todo-list">
                 {tasks.map((data , index)=>
                     <li className="todo-item" key={index}>

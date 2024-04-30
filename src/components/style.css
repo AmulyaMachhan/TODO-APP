@@ -44,6 +44,34 @@ h1 {
   .add-button:focus-visible {
     outline: 4px auto -webkit-focus-ring-color;
   }
+
+  .todos-filter{
+    padding: 10px 0;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+  }
+  .filter-items{
+    position: absolute;
+    left: 0;
+    list-style: none;
+    background-color: rgb(176, 173, 173);
+    border-radius: 10px;
+    padding: 5px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 5px;
+  }
+  .filter-button{
+    padding: 0.6rem;
+    border-radius: 10px;
+    font-size: 0.9rem;
+    background-color: rgb(95, 95, 47);
+    border: none;;
+  }
+
   .todo-list{
     display: flex;
     flex-direction: column;
